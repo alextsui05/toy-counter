@@ -12,10 +12,10 @@ document.addEventListener('turbolinks:load', function() {
     xhr.open('GET', binsPath);
     xhr.setRequestHeader('Accept', 'application/json');
     xhr.onload = function() {
-      done(null, xhr.response);
+      done(null, this.response);
     };
     xhr.onerror = function() {
-      done(xhr.response);
+      done(this.response);
     };
     xhr.send();
   };
