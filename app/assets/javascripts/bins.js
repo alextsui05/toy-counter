@@ -10,7 +10,7 @@ document.addEventListener('turbolinks:load', function() {
   var get = function(url) {
     return new Promise(function (resolve, reject) {
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', binsPath);
+      xhr.open('GET', url);
       xhr.setRequestHeader('Accept', 'application/json');
       xhr.onload = function() {
         if (this.status >= 200 && this.status < 300) {
@@ -43,4 +43,23 @@ document.addEventListener('turbolinks:load', function() {
     if (err) { throw err; }
     println(data);
   });
+
+  var incrementBin = function(ev) {
+    elem = ev.target;
+    if (!elem.classList.contains('increment_button'))
+      return;
+    var id = elem.getAttribute('data-id');
+    var binPath = binsPath + "/" + id;
+    get(binPath)
+    .then(function (data) {
+      println(data);
+      elem.text = "" + (parseInt(elem.text) + 1);
+    })
+    .catch(function(err) {
+      if (err) { throw err; }
+      println(data);
+    });
+  };
+
+  document.getElementById('bin_table').addEventListener('click', incrementBin);
 });

@@ -1,6 +1,6 @@
 %h1 Listing bins
 
-%table
+%table#bin_table
   %thead
     %tr
       %th
@@ -10,6 +10,7 @@
   %tbody
     - @bins.each do |bin|
       %tr
+        %td= link_to bin.value, 'javascript:void(0)', class: 'increment_button', data: { id: bin.id }
         %td= link_to 'Show', bin
         %td= link_to 'Edit', edit_bin_path(bin)
         %td= link_to 'Destroy', bin, method: :delete, data: { confirm: 'Are you sure?' }
