@@ -26,3 +26,5 @@ I want to use sassc-rails, but it depends on sassc which is locked to ffi 1.9,
 which is older than 1.10 (latest).
 
 Running `bundle update` bumps ffi down a minor version and it works.
+
+Weird hiccup with sqlite 1.4 so fixed to 1.3.x
