@@ -1,5 +1,5 @@
 class BinsController < ApplicationController
-  before_action :set_bin, only: [:show, :edit, :update, :destroy]
+  before_action :set_bin, only: [:show, :edit, :update, :destroy, :increment]
 
   # GET /bins
   # GET /bins.json
@@ -58,6 +58,20 @@ class BinsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to bins_url, notice: 'Bin was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  # POST /bins/1/increment
+  def increment
+    @bin.value += 1
+    if @bin.save
+      respond_to do |format|
+        format.html { redirect_to @bin, notice: 'Bin was successfully incremented.' }
+        format.json { render :show, status: :ok, location: @bin }
+      end
+    else
+      format.html { render :edit }
+      format.json { render json: @bin.errors, status: :unprocessible_entity }
     end
   end
 
