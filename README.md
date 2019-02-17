@@ -21,3 +21,8 @@ Ruby Sass is deprecated and will be unmaintained as of 26 March 2019.
 * For more details, please refer to the Sass blog:
   http://sass.logdown.com/posts/7081811
 ```
+
+I want to use sassc-rails, but it depends on sassc which is locked to ffi 1.9,
+which is older than 1.10 (latest).
+
+Running `bundle update` bumps ffi down a minor version and it works.
