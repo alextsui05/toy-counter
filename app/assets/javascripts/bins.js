@@ -7,23 +7,39 @@ document.addEventListener('turbolinks:load', function() {
     consoleElement.innerHTML += "<br />" + o;
   };
 
-  var get = function(url, done) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', binsPath);
-    xhr.setRequestHeader('Accept', 'application/json');
-    xhr.onload = function() {
-      done(null, this.response);
-    };
-    xhr.onerror = function() {
-      done(this.response);
-    };
-    xhr.send();
+  var get = function(url) {
+    return new Promise(function (resolve, reject) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', binsPath);
+      xhr.setRequestHeader('Accept', 'application/json');
+      xhr.onload = function() {
+        if (this.status >= 200 && this.status < 300) {
+          resolve(this.response);
+        } else {
+          reject({
+            status: this.status,
+            statusText: this.statusText
+          });
+        }
+      };
+      xhr.onerror = function() {
+        reject({
+          status: this.status,
+          statusText: this.statusText
+        });
+      };
+      xhr.send();
+    });
   };
 
   println('Hello, world!');
   var dataElement = document.getElementById('data');
   var binsPath = dataElement.getAttribute('data-bins-path');
-  get(binsPath, function(err, data) {
+  get(binsPath)
+  .then(function (data) {
+    println(data);
+  })
+  .catch(function(err) {
     if (err) { throw err; }
     println(data);
   });
