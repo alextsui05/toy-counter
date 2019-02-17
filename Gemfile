@@ -10,6 +10,7 @@ gem 'sqlite3', '~> 1.3.6'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
+gem 'sass', '~> 3.7.3'
 gem 'sassc-rails', '~> 2.1.0'
 
 gem 'haml-rails', '~> 1.0.0'
