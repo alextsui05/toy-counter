@@ -2,6 +2,10 @@
 
 Toy project to implement a counter increment API
 
+### Goals
+
+* Native Javascript only
+
 ## Changes
 
 * bundle init
@@ -28,3 +32,12 @@ which is older than 1.10 (latest).
 Running `bundle update` bumps ffi down a minor version and it works.
 
 Weird hiccup with sqlite 1.4 so fixed to 1.3.x
+
+## Impression
+
+* It's a little hard to reason about what `this` refers to in Javascript.
+* This took a whole day to do. I'm pretty bad at this.
+* I have a very nice and clean feeling having done it with pure Javascript.
+* How do I make a general `req` function? I cheated by making a closure from
+  the data on the current page.
+* How do I load javascripts on certain pages only?
